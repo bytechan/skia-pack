@@ -32,7 +32,6 @@ def main():
     'skia_use_system_libwebp=false',
     'skia_use_system_zlib=false',
     'skia_use_sfntly=false',
-    'skia_use_system_freetype2=false',
     'skia_use_system_harfbuzz=false',
     'skia_pdf_subset_harfbuzz=true',
     'skia_use_system_icu=false',
@@ -81,7 +80,7 @@ def main():
     args += [
       'skia_use_direct3d=false',
       'skia_use_gl=true',
-      'extra_cflags=["-DSK_FONT_HOST_USE_SYSTEM_SETTINGS", "/MD"]',
+      'extra_cflags=["-DSK_FONT_HOST_USE_SYSTEM_SETTINGS", "-DSK_GL", "/MD"]',
     ]
   elif 'android' == target:
     args += [
@@ -107,7 +106,6 @@ def main():
         'skia_use_webgl=true',
         'skia_use_piex=false',
         'skia_use_system_libpng=false',
-        'skia_use_system_freetype2=false',
         'skia_use_system_libjpeg_turbo=false',
         'skia_use_system_libwebp=false',
         'skia_enable_tools=false',
