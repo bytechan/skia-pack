@@ -46,8 +46,8 @@ def main():
     subprocess.check_call(["python", "tools/git-sync-deps"])
 
   # fetch ninja
-  print("> Fetching ninja")
-  subprocess.check_call(["python", "bin/fetch-ninja"])
+  # print("> Fetching ninja")
+  # subprocess.check_call(["python", "bin/fetch-ninja"])
 
   return 0
 

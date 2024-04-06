@@ -14,4 +14,4 @@ update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 60 --slave /usr/bi
 update-alternatives --config gcc 
 
 apt-get install git python wget -y
-apt-get install ninja-build fontconfig libfontconfig1-dev libglu1-mesa-dev curl zip -y
+apt-get install ninja-build fontconfig libfontconfig1-dev libglu1-mesa-dev curl zip ninja-build -y
