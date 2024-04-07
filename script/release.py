@@ -12,6 +12,8 @@ def main():
   os.chdir(os.pardir)
 
   zip = 'Skia-' + version + '-' + target + '-' + build_type + '-' + machine + classifier + '.zip'
+  print('> Release', zip)
+
   if not os.path.exists(zip):
     print('Can\'t find "' + zip + '"')
     return 1
