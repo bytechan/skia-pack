@@ -3,7 +3,11 @@
 import common, json, os, re, sys, urllib.request
 
 def main():
-  os.chdir(os.path.join(os.path.dirname(__file__), os.pardir, 'skia'))
+
+  skiroot = os.path.join(os.path.dirname(__file__), os.pardir, 'skia')
+  print('> Building Skia in', skiroot)
+
+  os.chdir(skiroot)
   version = common.version()
   build_type = common.build_type()
   machine = common.machine()
