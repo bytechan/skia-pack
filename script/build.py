@@ -72,8 +72,8 @@ def main():
         ]
     else:
         args += [
-            'cc="gcc-7"',
-            'cxx="g++-7"',
+            'cc="gcc-9"',
+            'cxx="g++-9"',
         ]
   elif 'windows' == target:
     args += [
