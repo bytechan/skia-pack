@@ -72,7 +72,7 @@ def main():
         ]
     else:
         args += [
-            'is_component_build=true',
+            '-shared',
             'cc="gcc-9"',
             'cxx="g++-9"',
         ]
