@@ -24,6 +24,7 @@ def main():
     out_bin + '/*.so',
     out_bin + '/*.so.*',
     out_bin + '/*.a',
+    out_bin + '/*.dll',
     out_bin + '/*.lib',
     out_bin + '/icudtl.dat',
     'include/**/*',
