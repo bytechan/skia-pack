@@ -21,6 +21,8 @@ def main():
   out_bin = 'out/' + build_type + '-' + target + '-' + machine
 
   globs = [
+    out_bin + '/*.so',
+    out_bin + '/*.so.*',
     out_bin + '/*.a',
     out_bin + '/*.lib',
     out_bin + '/icudtl.dat',
