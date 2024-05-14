@@ -51,6 +51,7 @@ def main():
     'src/core/*.h',
     'src/image/*.h',
     'src/sksl/*.h',
+    'src/shaders/*.h',
     'src/gpu/*.h',
     'src/gpu/gl/*.h',
     'src/gpu/ganesh/*.h',
