@@ -49,6 +49,7 @@ def main():
     'modules/skunicode/src/*.h',
     'src/base/*.h',
     'src/core/*.h',
+    'src/gpu/*.h',
     'src/gpu/gl/*.h',
     'src/gpu/ganesh/*.h',
     'src/utils/*.h',
