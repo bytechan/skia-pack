@@ -35,7 +35,7 @@ def main():
     'skia_use_system_harfbuzz=false',
     'skia_pdf_subset_harfbuzz=true',
     'skia_use_system_icu=false',
-    'skia_enable_skottie=true'
+    'skia_enable_skottie=false'
   ]
 
   if 'macos' == target or isIos or isTvos:
@@ -78,7 +78,7 @@ def main():
         ]
   elif 'windows' == target:
     args += [
-      # 'is_component_build=true',
+      'is_component_build=true',
       'skia_use_direct3d=false',
       'skia_use_gl=true',
       'extra_cflags=["-DSK_FONT_HOST_USE_SYSTEM_SETTINGS", "-DSK_GL", "/MD"]',
