@@ -2,6 +2,7 @@
 
 import common, os, re, subprocess, sys, zipfile
 import pathlib
+import platform
 
 def parents(path):
   res = []
@@ -64,7 +65,8 @@ def main():
   dist = 'Skia-' + version + '-' + 'src' + '.zip'
   print('> Writing', dist)
 
-  if 'linux' == common.host().lower():
+  # is linux system
+  if 'Linux' == platform.system():
     with zipfile.ZipFile(os.path.join(os.pardir, dist), 'w', compression=zipfile.ZIP_DEFLATED) as zip:
       dirs = set()
       for path in pathlib.Path().glob('*'):
