@@ -2,16 +2,8 @@
 
 import common, json, os, re, sys, urllib.request
 
-def main():
-  os.chdir(os.path.join(os.path.dirname(__file__), os.pardir, 'skia'))
-  version = common.version()
-  build_type = common.build_type()
-  machine = common.machine()
-  target = common.target()
-  classifier = common.classifier()
-  os.chdir(os.pardir)
 
-  zip = 'Skia-' + version + '-' + target + '-' + build_type + '-' + machine + classifier + '.zip'
+def upload(zip: str, version: str):
   if not os.path.exists(zip):
     print('Can\'t find "' + zip + '"')
     return 1
@@ -30,6 +22,23 @@ def main():
   headers['Content-Length'] = os.path.getsize(zip)
   with open(zip, 'rb') as data:
     urllib.request.urlopen(urllib.request.Request(upload_url + '?name=' + zip, data=data, headers=headers))
+
+
+
+def main():
+  os.chdir(os.path.join(os.path.dirname(__file__), os.pardir, 'skia'))
+  version = common.version()
+  build_type = common.build_type()
+  machine = common.machine()
+  target = common.target()
+  classifier = common.classifier()
+  os.chdir(os.pardir)
+
+  zip = 'Skia-' + version + '-' + target + '-' + build_type + '-' + machine + classifier + '.zip'
+  upload(zip)
+
+  zip = 'Skia-' + version + '-' + 'src' + '.zip'
+  upload(zip)
 
   return 0
 

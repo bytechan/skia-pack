@@ -53,7 +53,7 @@ def main():
   print("> Fetching ninja")
   subprocess.check_call(["python3", "bin/fetch-ninja"])
 
-  dist = 'Skia-' + version + '-src.zip'
+  dist = 'Skia-' + version + '-' + 'src' + '.zip'
   print('> Writing', dist)
 
   if 'linux' == common.host().lower():
@@ -62,6 +62,7 @@ def main():
       for file_path in folder_path.rglob('*'):
           if file_path.is_file():
               arcname = file_path.relative_to(folder_path)
+              print('> Adding', arcname)
               zip.write(file_path, arcname)
 
   return 0

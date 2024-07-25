@@ -69,18 +69,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: PATH=/usr/lib/binutils-2.26/bin:$PATH python3 script/checkout.py --version ${{ env.version }}
+      - uses: actions/upload-artifact@v2
+        if: ${{ github.event.inputs.skip_release != 'true' && github.ref == 'refs/heads/main' }}
+        with:
+          name: Skia-${{ env.version }}-src.zip
+          path: "*.zip"   
       - run: PATH=/usr/lib/binutils-2.26/bin:$PATH python3 script/build.py --build-type ${{ matrix.build_type }}
       - run: PATH=/usr/lib/binutils-2.26/bin:$PATH python3 script/archive.py --version ${{ env.version }} --build-type ${{ matrix.build_type }}
       - uses: actions/upload-artifact@v2
         if: ${{ github.event.inputs.skip_release != 'true' && github.ref == 'refs/heads/main' }}
         with:
           name: Skia-${{ env.version }}-linux-${{ matrix.build_type }}-x64.zip
-          path: "*.zip"
-      - uses: actions/upload-artifact@v2
-        if: ${{ github.event.inputs.skip_release != 'true' && github.ref == 'refs/heads/main' }}
-        with:
-          name: Skia-${{ env.version }}-src.zip
-          path: "*.zip"       
+          path: "*.zip"    
       - run: python3 script/release.py --version ${{ env.version }} --build-type ${{ matrix.build_type }}
         if: ${{ github.event.inputs.skip_release != 'true' && github.ref == 'refs/heads/main' }}
         env:
