@@ -1,16 +1,16 @@
 #! /usr/bin/env python3
 
 import common, os, re, subprocess, sys, zipfile
-import pathlib
 import platform
 
-def parents(path):
-  res = []
-  parent = path.parent
-  while '.' != str(parent):
-    res.insert(0, parent)
-    parent = parent.parent
-  return res
+def zip_dir(path, output=None):
+    output = output or os.path.basename(path) + '.zip'
+    zip = zipfile.ZipFile(output, 'w', zipfile.ZIP_DEFLATED)
+    for root, _, files in os.walk(path):
+        relative_root = '' if root == path else root.replace(path, '') + os.sep
+        for filename in files:
+            zip.write(os.path.join(root, filename), relative_root + filename)
+    zip.close()
 
 
 def main():
@@ -66,13 +66,13 @@ def main():
     dist = 'Skia-' + version + '-' + 'src' + '.zip'
     print('> Writing', dist)
 
-    folder_path = pathlib.Path(os.path.dirname(__file__))
-    with zipfile.ZipFile(os.path.join(os.pardir, dist), 'w', compression=zipfile.ZIP_DEFLATED) as zip:
-      for file_path in folder_path.rglob('*'):
-          if file_path.is_file():
-              arcname = file_path.relative_to(folder_path)
-              print("> Adding", arcname)
-              zip.write(file_path, arcname)
+    skia_path = os.getcwd()
+    print('> Creating', skia_path)
+    print('> Creating', os.path.dirname(__file__))
+
+    os.chdir(os.path.join(os.path.dirname(__file__), os.pardir))
+    zip_dir(skia_path, dist)
+    os.chdir("skia")
   
   return 0
 
