@@ -1,7 +1,15 @@
 #! /usr/bin/env python3
 
 import common, os, re, subprocess, sys, zipfile
-from pathlib import Path
+import pathlib
+
+def parents(path):
+  res = []
+  parent = path.parent
+  while '.' != str(parent):
+    res.insert(0, parent)
+    parent = parent.parent
+  return res
 
 
 def main():
@@ -57,14 +65,17 @@ def main():
   print('> Writing', dist)
 
   if 'linux' == common.host().lower():
-    folder_path = Path(os.path.dirname(__file__))
     with zipfile.ZipFile(os.path.join(os.pardir, dist), 'w', compression=zipfile.ZIP_DEFLATED) as zip:
-      for file_path in folder_path.rglob('*'):
-          if file_path.is_file():
-              arcname = file_path.relative_to(folder_path)
-              print('> Adding', arcname)
-              zip.write(file_path, arcname)
-
+      dirs = set()
+      for path in pathlib.Path().glob('*'):
+        if not path.is_dir():
+          for dir in parents(path):
+            if not dir in dirs:
+              print('> Adding', dir)
+              zip.write(str(dir))
+              dirs.add(dir)
+          zip.write(str(path))
+  
   return 0
 
 if __name__ == '__main__':

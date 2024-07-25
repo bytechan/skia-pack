@@ -35,10 +35,10 @@ def main():
   os.chdir(os.pardir)
 
   zip = 'Skia-' + version + '-' + target + '-' + build_type + '-' + machine + classifier + '.zip'
-  upload(zip)
+  upload(zip, version)
 
   zip = 'Skia-' + version + '-' + 'src' + '.zip'
-  upload(zip)
+  upload(zip, version)
 
   return 0
 
