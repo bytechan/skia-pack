@@ -62,11 +62,10 @@ def main():
   print("> Fetching ninja")
   subprocess.check_call(["python3", "bin/fetch-ninja"])
 
-  dist = 'Skia-' + version + '-' + 'src' + '.zip'
-  print('> Writing', dist)
-
-  # is linux system
   if 'Linux' == platform.system():
+    dist = 'Skia-' + version + '-' + 'src' + '.zip'
+    print('> Writing', dist)
+
     with zipfile.ZipFile(os.path.join(os.pardir, dist), 'w', compression=zipfile.ZIP_DEFLATED) as zip:
       dirs = set()
       for path in pathlib.Path().glob('*'):
