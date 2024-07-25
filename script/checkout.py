@@ -1,9 +1,13 @@
 #! /usr/bin/env python3
 
-import common, os, re, subprocess, sys
+import common, os, re, subprocess, sys, zipfile
+from pathlib import Path
+
 
 def main():
   os.chdir(os.path.join(os.path.dirname(__file__), os.pardir))
+
+  version = common.version()
 
   parser = common.create_parser(True)
   args = parser.parse_args()
@@ -48,6 +52,16 @@ def main():
   # fetch ninja
   print("> Fetching ninja")
   subprocess.check_call(["python3", "bin/fetch-ninja"])
+
+  dist = 'Skia-' + version + '-src.zip'
+  print('> Writing', dist)
+
+  folder_path = Path(os.path.dirname(__file__))
+  with zipfile.ZipFile(os.path.join(os.pardir, dist), 'w', compression=zipfile.ZIP_DEFLATED) as zip:
+    for file_path in folder_path.rglob('*'):
+        if file_path.is_file():
+            arcname = file_path.relative_to(folder_path)
+            zip.write(file_path, arcname)
 
   return 0
 
