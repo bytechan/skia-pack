@@ -56,12 +56,13 @@ def main():
   dist = 'Skia-' + version + '-src.zip'
   print('> Writing', dist)
 
-  folder_path = Path(os.path.dirname(__file__))
-  with zipfile.ZipFile(os.path.join(os.pardir, dist), 'w', compression=zipfile.ZIP_DEFLATED) as zip:
-    for file_path in folder_path.rglob('*'):
-        if file_path.is_file():
-            arcname = file_path.relative_to(folder_path)
-            zip.write(file_path, arcname)
+  if 'linux' == common.host().lower():
+    folder_path = Path(os.path.dirname(__file__))
+    with zipfile.ZipFile(os.path.join(os.pardir, dist), 'w', compression=zipfile.ZIP_DEFLATED) as zip:
+      for file_path in folder_path.rglob('*'):
+          if file_path.is_file():
+              arcname = file_path.relative_to(folder_path)
+              zip.write(file_path, arcname)
 
   return 0
 

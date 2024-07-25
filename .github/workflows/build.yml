@@ -14,6 +14,7 @@ on:
 
 env:
   version: m115-5ab9aa3
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
 jobs:
   windows:
