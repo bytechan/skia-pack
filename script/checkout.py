@@ -68,7 +68,7 @@ def main():
 
     skia_path = os.getcwd()
     print('> Creating', skia_path)
-    os.chdir(skia_path, os.pardir)
+    os.chdir(os.pardir)
     zip_dir(skia_path, dist)
     os.chdir("skia")
   
