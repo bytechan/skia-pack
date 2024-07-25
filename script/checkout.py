@@ -66,16 +66,13 @@ def main():
     dist = 'Skia-' + version + '-' + 'src' + '.zip'
     print('> Writing', dist)
 
+    folder_path = pathlib.Path(os.path.dirname(__file__))
     with zipfile.ZipFile(os.path.join(os.pardir, dist), 'w', compression=zipfile.ZIP_DEFLATED) as zip:
-      dirs = set()
-      for path in pathlib.Path().glob('*'):
-        if not path.is_dir():
-          for dir in parents(path):
-            if not dir in dirs:
-              print('> Adding', dir)
-              zip.write(str(dir))
-              dirs.add(dir)
-          zip.write(str(path))
+      for file_path in folder_path.rglob('*'):
+          if file_path.is_file():
+              arcname = file_path.relative_to(folder_path)
+              print("> Adding", arcname)
+              zip.write(file_path, arcname)
   
   return 0
 
